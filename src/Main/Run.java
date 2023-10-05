@@ -1,4 +1,5 @@
 package Main;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Run {
@@ -11,7 +12,7 @@ public class Run {
     static int count = 0;
     static Scanner in = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Collection games = new Collection();
         games.add(new Games("Resident Evil Village", 2021, "Survival horror", "Capcom", 36, count));
         do {
@@ -69,11 +70,20 @@ public class Run {
                     break;
 
                 case 8:
+                    FileInputStream file = new FileInputStream("games.txt");
+                    Scanner scanner = new Scanner(file);
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        String words[] = line.split(" ");
+                        games.add(new Games(words[0], Integer.parseInt(words[1]), words[2],words[3], Integer.parseInt(words[4]), Integer.parseInt(words[5])));
+
+                    }
 
                     break;
 
                 case 9:
-
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("games.txt")));
+                    games.add(new Games());
                     break;
 
                 case 0:
